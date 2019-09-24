@@ -141,7 +141,7 @@ public class Web2Controller {
 					InputStream data2 = file.getInputStream();
 					BufferedReader br = new BufferedReader(new InputStreamReader(data2));
 					StringBuffer sb = new StringBuffer();
-					
+					String line = "";
 					//저장경로 + 파일명 정의
 	//				String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 					String Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
