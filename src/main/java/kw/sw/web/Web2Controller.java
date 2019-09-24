@@ -93,7 +93,7 @@ public class Web2Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/home2";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/lout")
@@ -103,7 +103,7 @@ public class Web2Controller {
 		HashMap<String, Object> resultMap = HttpUtil.getUrl2(url, key);
 		System.out.println(resultMap);
 		hsession.invalidate();
-		return "redirect:/home2";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/create2")

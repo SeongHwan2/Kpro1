@@ -34,7 +34,7 @@
 		
 	    $("#list").on("click", function(){
 	    	console.log("list!!");
-	    	location.href="/home2"
+	    	location.href="/"
 	    })
 	    
 	    $(".buttonC button:button").on("click", function(){
