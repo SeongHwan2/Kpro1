@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -142,6 +144,17 @@ public class Web2Controller {
 					BufferedReader br = new BufferedReader(new InputStreamReader(data2));
 					StringBuffer sb = new StringBuffer();
 					String line = "";
+					String[] arr = null;
+					HashMap<String, Object> nickMap = new HashMap<String, Object>(); 
+					while((line = br.readLine()) != null) {
+//						sb.append(line);
+//						sb.append(",");
+//						sb.append("\r");
+						line.replace("-", "");
+						System.out.println(line);
+//						String[] arr2 = line.split(" ");
+//						System.out.println(arr2[i]);
+					}
 					//저장경로 + 파일명 정의
 	//				String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 					String Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
@@ -156,11 +169,11 @@ public class Web2Controller {
 					}
 					
 					//출력 객체 생성 + 파일 객체 넣기  (저장경로 + uuid + 확장자)
-					OutputStream os = new FileOutputStream(new File(Path + fileName + ext));
+//					OutputStream os = new FileOutputStream(new File(Path + fileName + ext));
 					//가져온 데이터 출력 객체에 넣기
-					os.write(data1);
+//					os.write(data1);
 					//출력 객체 종료
-					os.close();
+//					os.close();
 				}
 				
 				
@@ -169,15 +182,15 @@ public class Web2Controller {
 			}
 			
 		}
-		if(fileName != "") {
-			lBean.setFileName(originalfileName);
-			lBean.setFileUrl(url);
-		}
+//		if(fileName != "") {
+//			lBean.setFileName(originalfileName);
+//			lBean.setFileUrl(url);
+//		}
 		System.out.println(fileName + " - " + url);
 //		System.out.println(req.getAttribute("url"));
 //		System.out.println(params.toString());
-		d.insert(lBean);
-		return "redirect:/home2";
+//		d.insert(lBean);
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/chart")
