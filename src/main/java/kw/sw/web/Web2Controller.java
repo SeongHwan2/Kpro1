@@ -137,6 +137,7 @@ public class Web2Controller {
 					
 					//데이터 가져오기
 					byte data1[] =  file.getBytes();// getByte로 파일 내용 받기 >> byte로 넘어오기 때문에 byte패열에 저장
+					//text 구조 변경 시험
 					InputStream data2 = file.getInputStream();
 					BufferedReader br = new BufferedReader(new InputStreamReader(data2));
 					StringBuffer sb = new StringBuffer();
