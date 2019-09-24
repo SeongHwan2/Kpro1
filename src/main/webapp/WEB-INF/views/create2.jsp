@@ -46,7 +46,8 @@
 			$("tbody").empty();
 			$.ajax({
 				url: "/select",
-				type: "POST"
+				type: "POST",
+				data: {"nick" : nickname}
 			}).done(function(data){
 				console.log("성공");
 				console.log(data);

@@ -27,9 +27,9 @@ public class Dao {
 		return session.selectOne("sql.idC", joBean);
 	}
 	
-	public List<ListBean> select() {
+	public List<ListBean> select(HashMap<String, Object> params) {
 		System.out.println("select");
-		return session.selectList("sql.list");
+		return session.selectList("sql.list", params);
 	}
 	
 	

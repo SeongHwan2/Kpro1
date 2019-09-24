@@ -141,18 +141,25 @@ public class HomeController {
 	
 	@RequestMapping(value="/select", method=RequestMethod.POST)
 	public void selectList(HttpServletRequest req, HttpServletResponse res) {
-		List<ListBean> resultList = ls.select();
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		result.put("list", resultList);
-		JSONObject jobj = JSONObject.fromObject(result);
-		try {
-			res.setCharacterEncoding("UTF-8");
-			res.setContentType("application/json; charset=UTF-8");
-			res.getWriter().write(jobj.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		String nick = req.getParameter("nick");
+		System.out.println(nick);
+		if(nick != "") {
+			params.put("nick", nick);
+			List<ListBean> resultList = ls.select(params);
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			result.put("list", resultList);
+			JSONObject jobj = JSONObject.fromObject(result);
+			try {
+				res.setCharacterEncoding("UTF-8");
+				res.setContentType("application/json; charset=UTF-8");
+				res.getWriter().write(jobj.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 		System.out.println("select 시작");
 	}
 	

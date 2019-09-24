@@ -150,11 +150,20 @@ public class Web2Controller {
 //						sb.append(line);
 //						sb.append(",");
 //						sb.append("\r");
-						line.replace("-", "");
-						System.out.println(line);
 //						String[] arr2 = line.split(" ");
 //						System.out.println(arr2[i]);
+						int a = line.indexOf("---------------");
+						int b = line.indexOf("저장한");
+						int c = line.indexOf("카카오톡 대화");
+//						System.out.println(a);
+						if(a == -1 && b == -1 && c == -1) {
+//							System.out.println(line);
+							sb.append(line);
+							sb.append("\r");
+						}
 					}
+					br.close();
+					System.out.println(sb.toString());
 					//저장경로 + 파일명 정의
 	//				String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 					String Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리

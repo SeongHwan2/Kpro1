@@ -73,6 +73,10 @@
 	.dn {
 		display: none;
 	}
+	
+	#create2 {
+		float : right;
+	}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -100,22 +104,29 @@ $(document).ready(function() {
 	}
 	
 	function select() {
-		$.post("/select", function(data){
-			console.log(data);
-			storage = data.list;
-			console.log(storage);
-			$(".list").empty();
-			for(var i = 0; i < storage.length; i++) {
-				var tag = '<li class="list-group-item">' + storage[i].title + '</li>';
+		$.post("/select", {"nick" : nick } , function(data){
+			if(data != "") {
+				console.log(data);
+				storage = data.list;
+				console.log(storage);
+				$(".list").empty();
+				for(var i = 0; i < storage.length; i++) {
+					var tag = '<li class="list-group-item">' + storage[i].title + '</li>';
+					$(".list").append(tag);
+				}
+				
+				$(".list-group-item").on("click", function(){
+					var index = $(".list-group-item").index(this);
+					console.log(index);
+					console.log(storage[index]);
+					location.href = "/create2/?index=" + index;
+				})
+			} else {
+				$(".list").empty();
+				var tag = '<li class="list-group-item">' + '로그인이 필요합니다.' + '</li>';
 				$(".list").append(tag);
 			}
 			
-			$(".list-group-item").on("click", function(){
-				var index = $(".list-group-item").index(this);
-				console.log(index);
-				console.log(storage[index]);
-				location.href = "/create2/?index=" + index;
-			})
 			
 		})
 	}
@@ -150,13 +161,13 @@ $(document).ready(function() {
 		       <div class="w3-container">
 		       <p>nickName</p>
 		       </div>
-		     </div>
-		  <button type="button" id ="create2">글작성</button>    
+		     </div>   
 		  <ul class="list">
 		    <li class="list-group-item">첫번째글</li>
 		    <li class="list-group-item">두번째글</li>
 		    <li class="list-group-item">세번째글</li>
 		  </ul>
+		  <button type="button" id ="create2">파일등록</button> 
 		</article>
 	</section>
 	<footer>푸터</footer>

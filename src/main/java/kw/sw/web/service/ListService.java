@@ -15,8 +15,8 @@ public class ListService {
 	@Autowired
 	Dao d;
 	
-	public List<ListBean> select() {
-		List<ListBean> result = d.select();
+	public List<ListBean> select(HashMap<String, Object> params) {
+		List<ListBean> result = d.select(params);
 		System.out.println(result);
 		String title = result.get(0).getTitle();
 		System.out.println(title);

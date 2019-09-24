@@ -13,8 +13,8 @@
   	and `password` = #{password}</if>
   </select>
   
-  <select id="list" resultType="kw.sw.web.beans.ListBean">
-  	select * from `Notice` where `delYn` = 'N'
+  <select id="list" parameterType="hashmap" resultType="kw.sw.web.beans.ListBean">
+  	select * from `Notice` where nickName = #{nick} and `delYn` = 'N'
   </select>
   
   <insert id="join" parameterType="kw.sw.web.beans.joinBean">
