@@ -40,11 +40,6 @@ public class Web2Controller {
 		return "write";
 	}
 
-	@RequestMapping("/home2")
-	public String web2home(Model model) {
-		return "web2Home";
-	}
-
 	@RequestMapping("/loin")
 	public void loin(HttpServletRequest req, HttpServletResponse res) {
 		try {

@@ -53,11 +53,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
-	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest req, @Valid joinBean loBean, BindingResult result) {
 		String msg = "";
