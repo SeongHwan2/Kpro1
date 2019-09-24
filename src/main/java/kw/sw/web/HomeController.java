@@ -45,7 +45,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "login";
+		return "web2Home";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
