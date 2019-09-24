@@ -1,0 +1,62 @@
+@charset "UTF-8";
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	
+	header {
+		width: 100vw;
+		height: 150px;
+		text-align: center;
+	}
+	
+	header h2 {
+		display: inline-block;
+	}
+	
+	section {
+		text-align: center;
+	}
+	
+	section form {
+		width: 70%;
+		margin: auto;
+	}
+	
+	section form button{
+		display: inline-block;
+		float: right;
+	}
+	
+	.tb{
+		width: 65%;
+		height: 30px;
+	}
+	
+	#file {
+		display: inline-block;
+		float: right;
+	}
+	
+	.textbox{
+		border: 1px solid #CCCCCC; border-radius: 4px; margin-top: 10px;
+		width: 65%;
+		height: 200px;
+	}
+	
+	input {
+		border: 1px solid #CCCCCC; border-radius: 4px; margin-top: 10px;
+		width: 60%;
+	}
+	
+	.buttonC {
+		display: inline-block;
+		float: right;
+		margin-right: 100px;
+	}
+	
+	.dn {
+		display: none;
+	}
+</style>

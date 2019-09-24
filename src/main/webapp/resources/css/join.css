@@ -1,0 +1,68 @@
+@charset "UTF-8";
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	
+	header {
+		width: 100vw;
+		height: 150px;
+		text-align: center;
+	}
+	
+	header h2 {
+		display: inline-block;
+	}
+	
+	section {
+		
+	}
+	
+	section form {
+		width: 70%;
+		margin: auto;
+	}
+	
+	#submit {
+		width: 100%;
+	}
+	
+	.tb{
+		width: 65%;
+		height: 30px;
+	}
+	
+	#file {
+		display: inline-block;
+		float: right;
+	}
+	
+	input {
+		border: 1px solid #CCCCCC; border-radius: 4px; margin-top: 10px;
+		width: 60%;
+	}
+	
+	.dn {
+		display: none;
+	}
+	
+	p {
+		line-height: 44px;
+		vertical-align: middle;
+	}
+	
+	#check {
+		display: inline-block;
+		float: none!important;
+		width:inherit;
+	}
+	
+	.id_error{
+		border-color: red;
+	}
+	
+	.id_success{
+		border-color: blue;
+	}
+</style>

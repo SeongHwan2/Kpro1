@@ -7,29 +7,29 @@
     select 1 from cnt
   </select>
   
-  <select id="idC" parameterType="kr.sw.web.beans.joinBean" resultType="hashmap">
+  <select id="idC" parameterType="kw.sw.web.beans.joinBean" resultType="hashmap">
   	SELECT * FROM `user` WHERE `id` = #{id}
   	<if test="password != null">
   	and `password` = #{password}</if>
   </select>
   
-  <select id="list" resultType="kr.sw.web.beans.ListBean">
+  <select id="list" resultType="kw.sw.web.beans.ListBean">
   	select * from `Notice` where `delYn` = 'N'
   </select>
   
-  <insert id="join" parameterType="kr.sw.web.beans.joinBean">
+  <insert id="join" parameterType="kw.sw.web.beans.joinBean">
   	insert into `user` (`id`, `password`, `nickname`, `delYn`) values(#{id}, #{password}, #{nickname}, 'N')
   </insert>
   
-  <insert id="insert" parameterType="kr.sw.web.beans.ListBean" >
+  <insert id="insert" parameterType="kw.sw.web.beans.ListBean" >
   	INSERT INTO Notice(`txt`, `title`<if test="fileName!=null and fileName!=''">,`fileName`,`fileUrl`</if>, `nickName`,`delYn`) VALUES (#{txt}, #{title}<if test="fileName!=null and fileName!=''">,#{fileName},#{fileUrl}</if>, #{nickName}, 'N');
   </insert>
   
-  <update id="update" parameterType="kr.sw.web.beans.ListBean">
+  <update id="update" parameterType="kw.sw.web.beans.ListBean">
   	UPDATE `Notice` SET `txt` = #{txt} <if test="fileName!=null and fileName!=''">,`fileName` = #{fileName} ,`fileUrl` = #{fileUrl}</if> WHERE `no` = ${no}
   </update>
   
-  <update id="delete" parameterType="kr.sw.web.beans.ListBean">
+  <update id="delete" parameterType="kw.sw.web.beans.ListBean">
   	UPDATE `Notice` SET `delYn` = 'Y' WHERE `no` = ${no}
   </update>
 </mapper>
