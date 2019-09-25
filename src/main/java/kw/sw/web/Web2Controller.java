@@ -2,16 +2,13 @@ package kw.sw.web;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kw.sw.web.Util.HttpUtil;
 import kw.sw.web.beans.ListBean;
 import kw.sw.web.dao.Dao;
-import kw.sw.web.Util.HttpUtil;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -138,13 +135,12 @@ public class Web2Controller {
 	//				System.out.println(req.getSession().getServletContext().getRealPath("/")); //file처리시 유용
 					
 					//데이터 가져오기
-					byte data1[] =  file.getBytes();// getByte로 파일 내용 받기 >> byte로 넘어오기 때문에 byte패열에 저장
+//					byte data1[] =  file.getBytes();// getByte로 파일 내용 받기 >> byte로 넘어오기 때문에 byte패열에 저장
 					//text 구조 변경 시험
 					InputStream data2 = file.getInputStream();
 					BufferedReader br = new BufferedReader(new InputStreamReader(data2));
 					StringBuffer sb = new StringBuffer();
 					String line = "";
-					String[] arr = null;
 					HashMap<String, Object> nickMap = new HashMap<String, Object>(); 
 					while((line = br.readLine()) != null) {
 //						sb.append(line);
@@ -155,17 +151,16 @@ public class Web2Controller {
 						int a = line.indexOf("---------------");
 						int b = line.indexOf("저장한");
 						int c = line.indexOf("카카오톡 대화");
-//						System.out.println(a);
 						if(a == -1 && b == -1 && c == -1) {
-//							System.out.println(line);
-							String[] a1 = line.split("]");
-							System.out.println(a1[i]);
-//							sb.append(line);
-//							sb.append("\r");
+							System.out.println(line);
+//							String[] a1 = line.split("]");
+//							System.out.println(a1[i]);
+							sb.append(line);
+							sb.append('\r');
 						}
 					}
 					br.close();
-//					System.out.println(sb.toString());
+					System.out.println(sb);
 					//저장경로 + 파일명 정의
 	//				String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 					String Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
@@ -180,10 +175,13 @@ public class Web2Controller {
 					}
 					
 					//출력 객체 생성 + 파일 객체 넣기  (저장경로 + uuid + 확장자)
+//					FileWriter fw = new FileWriter(new File(Path + fileName + ext));
 //					OutputStream os = new FileOutputStream(new File(Path + fileName + ext));
 					//가져온 데이터 출력 객체에 넣기
+//					fw.write(sb.toString());
 //					os.write(data1);
 					//출력 객체 종료
+//					fw.close();
 //					os.close();
 				}
 				
