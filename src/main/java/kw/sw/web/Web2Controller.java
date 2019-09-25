@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kw.sw.web.Util.HttpUtil;
 import kw.sw.web.beans.ListBean;
 import kw.sw.web.dao.Dao;
+import kw.sw.web.hdfs.Hadoop;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -152,11 +153,13 @@ public class Web2Controller {
 						int b = line.indexOf("저장한");
 						int c = line.indexOf("카카오톡 대화");
 						if(a == -1 && b == -1 && c == -1) {
-							System.out.println(line);
+//							System.out.println(line);
 //							String[] a1 = line.split("]");
 //							System.out.println(a1[i]);
+//							sb.append(line);
+//							sb.append('\r');
 							sb.append(line);
-							sb.append('\r');
+							sb.append("\r");
 						}
 					}
 					br.close();
@@ -204,6 +207,13 @@ public class Web2Controller {
 	
 	@RequestMapping("/chart")
 	public String chart() {
+		return "chart";
+	}
+	
+	@RequestMapping("/analy")
+	public String analy() {
+		Hadoop hadoop = new Hadoop();
+		hadoop.run();
 		return "chart";
 	}
 

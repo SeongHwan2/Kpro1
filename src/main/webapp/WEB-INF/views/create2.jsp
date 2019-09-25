@@ -27,7 +27,7 @@
 			$("input[name=file]").addClass("dn");
 			$("textarea[name=txt]").addClass("di");
 			$(".di").attr("disabled", true);
-			$("h2").text("learnMore");
+			$("h2").text("분석하기");
 		}
 		
 		$("input[name=nickName]").val(nickname);
@@ -59,6 +59,7 @@
 					$('input[name=title]').val(storage[index].title);
 					$('textarea[name=txt]').val(storage[index].txt);
 					if(storage[index].fileName != ""){
+						$("#analy").removeClass("dn");
 						$("#download").removeClass("dn");
 						$("input[name=url]").val(storage[index].fileUrl);
 						$("input[name=fileName]").val(storage[index].fileName);
@@ -68,7 +69,7 @@
 						$("#delete").removeClass("dn");
 						$("textarea[name=txt]").attr("disabled", false);
 					}
-					var filename = (storage[index].fileName!=null)?storage[index].fileName:"업로드된 파일 없음";
+					var filename = (storage[index].fileName != null) ? storage[index].fileName : "업로드된 파일 없음";
 					$('#fList').val(filename);
 				}
 			})
@@ -112,6 +113,10 @@
 		    	})
 	    })
 	    
+	    $("#analy").on("click", function(){
+	    	location.href="/analy"
+	    })
+	    
 	    select();  
 	    
 	});
@@ -127,7 +132,7 @@
 			<p>
 			<label>제목</label>
 			<input type="text" name="title" placeholder="제목을 입력하세요" class="tb di" required="required"></p>
-			<p>
+			<p class="dn">
 			<label>내용</label>
 			<textarea name="txt" class="textbox" required="required"></textarea>
 			</p>
@@ -143,6 +148,7 @@
 				<button type="submit" id="insert">등록</button>
 				<button type="button" id="delete" class="dn">삭제</button>
 				<button type="button" id="update" class="dn">수정</button>
+				<button type="button" id="analy" class="dn">분석시작</button>
 			</div>
 		</form>
 		<form action="/download" method="post">
@@ -150,6 +156,7 @@
 			<input type="text" name="url" class="dn">
 			<input type="text" name="fileName" class="dn">
 		</form>
+		
 	</section>
 </body>
 </html>
