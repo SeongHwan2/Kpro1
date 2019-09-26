@@ -155,10 +155,7 @@ public class Web2Controller {
 						int c = line.indexOf("카카오톡 대화");
 						if(a == -1 && b == -1 && c == -1) {
 //							System.out.println(line);
-//							String[] a1 = line.split("]");
-//							System.out.println(a1[i]);
 							sb.append(line);
-//							sb.append(line);
 							sb.append("\r\n");							
 //							an += line + "\r\n";
 						}
