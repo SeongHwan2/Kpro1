@@ -128,13 +128,13 @@
 		<h2>Input & Output</h2>
 	</header>
 	<section>
-		<form id="" action="/insert2" method="POST" enctype="multipart/form-data">
+		<form id="" action="/insert" method="POST" enctype="multipart/form-data">
 			<p>
 			<label>제목</label>
-			<input type="text" name="title" placeholder="제목을 입력하세요" class="tb di" required="required"></p>
+			<input type="text" name="title" placeholder="파일의 이름을 지정해 주세요" class="tb di" required="required"></p>
 			<p class="dn">
 			<label>내용</label>
-			<textarea name="txt" class="textbox" required="required"></textarea>
+			<textarea name="txt" class="textbox"></textarea>
 			</p>
 			<div>
 			<label>첨부파일</label>

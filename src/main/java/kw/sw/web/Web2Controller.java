@@ -111,13 +111,14 @@ public class Web2Controller {
 		return "create2";
 	}
 	
-	@RequestMapping(value="/insert2", method=RequestMethod.POST)
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert2(HttpServletRequest req , @RequestParam("file") MultipartFile[] files, HttpServletResponse res, ListBean lBean) {
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		String fileName = "";
 		String url = "";
 		String ext = "";
 		String originalfileName = "";
+		String an = "";
 		if(files.length > 0) {
 			//파일 업로드 부분!!
 			try {
@@ -156,16 +157,17 @@ public class Web2Controller {
 //							System.out.println(line);
 //							String[] a1 = line.split("]");
 //							System.out.println(a1[i]);
-//							sb.append(line);
-//							sb.append('\r');
 							sb.append(line);
-							sb.append("\r");
+//							sb.append(line);
+							sb.append("\r\n");							
+//							an += line + "\r\n";
 						}
 					}
 					br.close();
 					System.out.println(sb);
+//					System.out.println(an);
 					//저장경로 + 파일명 정의
-	//				String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
+//					String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 					String Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
 					url = "D:\\IDE\\workspace\\upload\\" + fileName + ext;
 					System.out.println(url);
@@ -178,13 +180,15 @@ public class Web2Controller {
 					}
 					
 					//출력 객체 생성 + 파일 객체 넣기  (저장경로 + uuid + 확장자)
-//					FileWriter fw = new FileWriter(new File(Path + fileName + ext));
+					FileWriter fw = new FileWriter(new File(Path + fileName + ext));
 //					OutputStream os = new FileOutputStream(new File(Path + fileName + ext));
 					//가져온 데이터 출력 객체에 넣기
-//					fw.write(sb.toString());
+					fw.write(sb.toString());
+//					fw.write(an);
+					fw.flush();
 //					os.write(data1);
 					//출력 객체 종료
-//					fw.close();
+					fw.close();
 //					os.close();
 				}
 				
@@ -210,11 +214,5 @@ public class Web2Controller {
 		return "chart";
 	}
 	
-	@RequestMapping("/analy")
-	public String analy() {
-		Hadoop hadoop = new Hadoop();
-		hadoop.run();
-		return "chart";
-	}
 
 }
