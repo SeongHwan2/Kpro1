@@ -88,6 +88,7 @@ public class Web2Controller {
 			HttpSession hsession = req.getSession();
 			hsession.setAttribute("nick", nick);
 			hsession.setAttribute("imgUrl", proUrl);
+			hsession.setAttribute("access_token", access_token);
 //			model.addAttribute("access_token",access_token); 
 //			model.addAttribute("pro", jobj);
 		} catch (Exception e) {
@@ -119,6 +120,8 @@ public class Web2Controller {
 		String ext = "";
 		String originalfileName = "";
 		String an = "";
+		String nickName = lBean.getNickName();
+		System.out.println(nickName);
 		if(files.length > 0) {
 			//파일 업로드 부분!!
 			try {
@@ -165,7 +168,7 @@ public class Web2Controller {
 //					System.out.println(an);
 					//저장경로 + 파일명 정의
 //					String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
-					String Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
+					String Path = "D:\\IDE\\workspace\\upload\\" + nickName + "\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
 					url = "D:\\IDE\\workspace\\upload\\" + fileName + ext;
 					System.out.println(url);
 					req.setAttribute("url", url);

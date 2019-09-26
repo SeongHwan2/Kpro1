@@ -53,25 +53,29 @@
 				console.log(data);
 				console.log(data.list);
 				storage = data.list;
+				console.log(storage.length);
 				console.log(storage);
-				if(index != -1){
-					console.log(index);
-					$('input[name=title]').val(storage[index].title);
-					$('textarea[name=txt]').val(storage[index].txt);
-					if(storage[index].fileName != ""){
-						$("#analy").removeClass("dn");
-						$("#download").removeClass("dn");
-						$("input[name=url]").val(storage[index].fileUrl);
-						$("input[name=fileName]").val(storage[index].fileName);
+				if(storage.length > 0){
+					if(index != -1){
+						console.log(index);
+						$('input[name=title]').val(storage[index].title);
+						$('textarea[name=txt]').val(storage[index].txt);
+						if(storage[index].fileName != ""){
+							$("#analy").removeClass("dn");
+							$("#download").removeClass("dn");
+							$("input[name=url]").val(storage[index].fileUrl);
+							$("input[name=fileName]").val(storage[index].fileName);
+						}
+						if (storage[index].nickName == nickname || nickname == "주인장" || nickname == "관리자"){
+							$("#update").removeClass("dn");
+							$("#delete").removeClass("dn");
+							$("textarea[name=txt]").attr("disabled", false);
+						}
+						var filename = (storage[index].fileName != null) ? storage[index].fileName : "업로드된 파일 없음";
+						$('#fList').val(filename);
 					}
-					if (storage[index].nickName == nickname || nickname == "주인장" || nickname == "관리자"){
-						$("#update").removeClass("dn");
-						$("#delete").removeClass("dn");
-						$("textarea[name=txt]").attr("disabled", false);
-					}
-					var filename = (storage[index].fileName != null) ? storage[index].fileName : "업로드된 파일 없음";
-					$('#fList').val(filename);
 				}
+
 			})
 		}
 	    
@@ -113,11 +117,12 @@
 		    	})
 	    })
 	    
-	    $("#analy").on("click", function(){
+	   /*  $("#analy").on("click", function(){
 	    	location.href="/analy"
-	    })
+	    }) */
 	    
-	    select();  
+	    	select();
+	      
 	    
 	});
 </script>
@@ -125,7 +130,7 @@
 <body>
 <%-- <%=session.getAttribute("nick") %> --%>
 	<header>
-		<h2>Input & Output</h2>
+		<h2>파일등록</h2>
 	</header>
 	<section>
 		<form id="" action="/insert" method="POST" enctype="multipart/form-data">
@@ -148,7 +153,6 @@
 				<button type="submit" id="insert">등록</button>
 				<button type="button" id="delete" class="dn">삭제</button>
 				<button type="button" id="update" class="dn">수정</button>
-				<button type="button" id="analy" class="dn">분석시작</button>
 			</div>
 		</form>
 		<form action="/download" method="post">
@@ -156,7 +160,10 @@
 			<input type="text" name="url" class="dn">
 			<input type="text" name="fileName" class="dn">
 		</form>
-		
+		<form action="/analy" method="post">
+			<button type="submit" id="analy" class="dn">분석시작</button>
+			<input type="text" name="fileName" class="dn">
+		</form>
 	</section>
 </body>
 </html>

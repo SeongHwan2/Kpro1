@@ -13,10 +13,16 @@
 		margin: 0px;
 		padding: 0px;
 		box-sizing: border-box;
+		background-color: RGB(255, 255, 204);
 	}
 	
 	header {
 		text-align: center;
+	}
+	
+	header img {
+		display: inline-block;
+		width: 150px;
 	}
 	
 	section {
@@ -89,11 +95,14 @@ $(document).ready(function() {
 	if('<%= session.getAttribute("nick") %>' != 'null'){
 		imgUrl ='<%= session.getAttribute("imgUrl") %>';
 		nick = '<%= session.getAttribute("nick") %>' ;
-		token = '<%= request.getAttribute("access_token") %>';
+		token = '<%= session.getAttribute("access_token") %>';
 		console.log(nick + " : " +  imgUrl + " token : " + token);
 		$(".profileC img").attr("src", imgUrl);
 		$(".profileC p").text(nick);
 		$("#lout input").val(token);
+		$("#create2").removeClass("dn");
+		$("#profile").removeClass("dn");
+		$("article h2").text("Who am I");
 		loCheck = true;
 	}
 	
@@ -109,18 +118,21 @@ $(document).ready(function() {
 				console.log(data);
 				storage = data.list;
 				console.log(storage);
-				$(".list").empty();
-				for(var i = 0; i < storage.length; i++) {
-					var tag = '<li class="list-group-item">' + storage[i].title + '</li>';
-					$(".list").append(tag);
+				console.log(storage.length);
+				if(storage.length > 0){
+					$(".list").empty();
+					for(var i = 0; i < storage.length; i++) {
+						var tag = '<li class="list-group-item">' + storage[i].title + '</li>';
+						$(".list").append(tag);
+					}
+					
+					$(".list-group-item").on("click", function(){
+						var index = $(".list-group-item").index(this);
+						console.log(index);
+						console.log(storage[index]);
+						location.href = "/create2/?index=" + index;
+					})
 				}
-				
-				$(".list-group-item").on("click", function(){
-					var index = $(".list-group-item").index(this);
-					console.log(index);
-					console.log(storage[index]);
-					location.href = "/create2/?index=" + index;
-				})
 			} else {
 				$(".list").empty();
 				var tag = '<li class="list-group-item">' + '로그인이 필요합니다.' + '</li>';
@@ -142,7 +154,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<header>
-		<h1>게시판</h1>
+		<h1>카카오대화분석</h1>
 	</header>
 	<nav>
 		<form action="/loin" id="loin">
@@ -155,19 +167,16 @@ $(document).ready(function() {
 	</nav>
 	<section>
 		<article class="Container">
-		  <h2>Who am I</h2>
-		     <div class="profileC">
+		  <h2>로그인이 필요합니다</h2>
+		     <div id="profile" class="profileC dn">
 		       <img src="" width="75%" height="200px" alt="profilePhoto">
 		       <div class="w3-container">
 		       <p>nickName</p>
 		       </div>
 		     </div>   
 		  <ul class="list">
-		    <li class="list-group-item">첫번째글</li>
-		    <li class="list-group-item">두번째글</li>
-		    <li class="list-group-item">세번째글</li>
 		  </ul>
-		  <button type="button" id ="create2">파일등록</button> 
+		  <button type="button" id ="create2" class="dn">파일등록</button> 
 		</article>
 	</section>
 	<footer>푸터</footer>
