@@ -17,9 +17,7 @@ public class ListService {
 	
 	public List<ListBean> select(HashMap<String, Object> params) {
 		List<ListBean> result = d.select(params);
-		System.out.println(result);
-		String title = result.get(0).getTitle();
-		System.out.println(title);
+		System.out.println(result.size());
 		return result;
 	}
 	
@@ -28,6 +26,7 @@ public class ListService {
 		String type = (String) params.get("type");
 		ListBean lbean = (ListBean) params.get("lbean");
 		System.out.println(d.update(lbean));
+		System.out.println(type);
 		switch(type) {
 		case "3":
 			return d.update(lbean);

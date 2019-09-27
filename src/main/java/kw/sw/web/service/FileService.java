@@ -22,14 +22,14 @@ public class FileService {
 	Dao d;
 	
 	public void fileUpload(ListBean lBean, MultipartFile[] files) {
+		
+		System.out.println(lBean.toString());
 		String fileName = "";
 		String url = "";
 		String ext = "";
 		String originalfileName = "";
 		String title = lBean.getTitle();
 		String nickName = lBean.getNickName();
-		System.out.println(lBean.toString());
-		System.out.println(files.toString());
 		
 		if(files.length > 0) {
 			//파일 업로드 부분!!
@@ -108,6 +108,13 @@ public class FileService {
 			
 		}
 		
+		if(fileName != "") {
+			System.out.println(ext);
+			lBean.setFileName(originalfileName); //title + ext로 변경 예정!
+			lBean.setFileUrl(url);
+		}
+		System.out.println(lBean.toString());
 		System.out.println(fileName + " - " + url);
+		d.insert(lBean);
 	}
 }

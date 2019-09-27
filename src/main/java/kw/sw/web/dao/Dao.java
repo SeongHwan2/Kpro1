@@ -28,7 +28,7 @@ public class Dao {
 	}
 	
 	public List<ListBean> select(HashMap<String, Object> params) {
-		System.out.println("select");
+//		System.out.println("select");
 		return session.selectList("sql.list", params);
 	}
 	

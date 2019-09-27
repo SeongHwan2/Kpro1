@@ -59,8 +59,10 @@ public class HomeController {
 		String nick = req.getParameter("nick");
 		System.out.println(nick);
 		if(nick != "") {
+			System.out.println("select 시작");
 			params.put("nick", nick);
 			List<ListBean> resultList = ls.select(params);
+//			System.out.println(resultList.size());
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			result.put("list", resultList);
 			JSONObject jobj = JSONObject.fromObject(result);
@@ -74,49 +76,7 @@ public class HomeController {
 			}
 		}
 		
-		System.out.println("select 시작");
 	}
-	
-	/*
-	 * @RequestMapping(value="/insert", method=RequestMethod.POST) public String
-	 * insert(HttpServletRequest req , @RequestParam("file") MultipartFile[] files,
-	 * HttpServletResponse res, ListBean lBean) { HashMap<String, Object> data = new
-	 * HashMap<String, Object>(); String fileName = ""; String url = ""; String ext
-	 * = ""; String originalfileName = ""; if(files.length > 0) { //파일 업로드 부분!! try
-	 * { // req.setCharacterEncoding("UTF-8"); >> MultipartFile에 받아질시에 깨져서 들어오기때문에
-	 * req에 넣어줘도 필터가 되지 않음! 필터를 넣어줘야 spring이 알아서 처리해서 받아옴 for(int i = 0; i <
-	 * files.length; i++) { MultipartFile file = files[i];
-	 * System.out.println(file.getOriginalFilename()); //원본파일명 생성(test.txt)
-	 * originalfileName = file.getOriginalFilename(); // 파일 확장자 생성 (.txt) ext =
-	 * originalfileName.substring(originalfileName.lastIndexOf("."),
-	 * originalfileName.length()); //고유한 파일명 생성(UUID) fileName =
-	 * UUID.randomUUID().toString(); //고유 파일명 만들기 // 프로젝트 경로 받기 //
-	 * System.out.println(req.getContextPath()); // 화면에서만 사용하면 좋다!! //
-	 * System.out.println(req.getSession().getServletContext().getRealPath("/"));
-	 * //file처리시 유용
-	 * 
-	 * //데이터 가져오기 byte data1[] = file.getBytes(); // getByte로 파일 내용 받기 >> byte로 넘어오기
-	 * 때문에 byte패열에 저장 //저장경로 + 파일명 정의 // String realPath =
-	 * req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치 String
-	 * Path = "D:\\IDE\\workspace\\upload\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다
-	 * >> 디렉토리 관리 url = "D:\\IDE\\workspace\\upload\\" + fileName + ext;
-	 * System.out.println(url); req.setAttribute("url", url); // 파일 객체 생셩 File f =
-	 * new File(Path); // 디렉토리 없을경우 생성!! if(!f.isDirectory()) { //디렉토리 확인
-	 * f.mkdirs(); }
-	 * 
-	 * //출력 객체 생성 + 파일 객체 넣기 (저장경로 + uuid + 확장자) OutputStream os = new
-	 * FileOutputStream(new File(Path + fileName + ext)); //가져온 데이터 출력 객체에 넣기
-	 * os.write(data1); //출력 객체 종료 os.close(); }
-	 * 
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); }
-	 * 
-	 * } if(fileName != "") { lBean.setFileName(originalfileName);
-	 * lBean.setFileUrl(url); } System.out.println(fileName + " - " + url); //
-	 * System.out.println(req.getAttribute("url")); //
-	 * System.out.println(params.toString()); d.insert(lBean); return
-	 * "redirect:/home"; }
-	 */
 	
 	@RequestMapping("/ud")
 	public void cud(HttpServletRequest req, HttpServletResponse res, ListBean lBean) {

@@ -132,6 +132,9 @@ $(document).ready(function() {
 						console.log(storage[index]);
 						location.href = "/create2/?index=" + index;
 					})
+				}else if(storage.length == 0){
+					var tag = '<li class="list-group-item">' + "업로드한 파일이 없습니다." + '</li>';
+					$(".list").append(tag);										
 				}
 			} else {
 				$(".list").empty();

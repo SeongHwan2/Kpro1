@@ -84,7 +84,7 @@
 	    		url: '/ud',
 	    		type: 'POST',
 	    		data: {
-	    			"txt" : $("textarea[name=txt]").val(),
+	    			"title" : $("textarea[name=title]").val(),
 	    			"no" : 	storage[index].no,
 	    			"type" : bIndex
 	    		}
@@ -117,13 +117,8 @@
 		    	})
 	    })
 	    
-	   /*  $("#analy").on("click", function(){
-	    	location.href="/analy"
-	    }) */
-	    
-	    	select();
-	      
-	    
+	    select();
+	 
 	});
 </script>
 </head>
@@ -137,10 +132,6 @@
 			<p>
 			<label>제목</label>
 			<input type="text" name="title" placeholder="파일의 이름을 지정해 주세요" class="tb di" required="required"></p>
-			<p class="dn">
-			<label>내용</label>
-			<textarea name="txt" class="textbox"></textarea>
-			</p>
 			<div>
 			<label>첨부파일</label>
 			<input type="file" multiple="multiple" name="file" class="di"  accept="image/*, .txt, .pdf, .opd">

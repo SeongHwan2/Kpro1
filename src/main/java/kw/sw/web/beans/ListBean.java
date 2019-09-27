@@ -2,7 +2,6 @@ package kw.sw.web.beans;
 
 public class ListBean {
 	private String title;
-	private String txt;
 	private String fileName;
 	private String fileUrl;
 	private String nickName;
@@ -20,12 +19,7 @@ public class ListBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getTxt() {
-		return txt;
-	}
-	public void setTxt(String txt) {
-		this.txt = txt;
-	}
+
 	public String getFileName() {
 		return fileName;
 	}
@@ -46,9 +40,10 @@ public class ListBean {
 	}
 	@Override
 	public String toString() {
-		return "ListBean [title=" + title + ", txt=" + txt + ", fileName=" + fileName + ", fileUrl=" + fileUrl
-				+ ", nickName=" + nickName + ", no=" + no + "]";
+		return "ListBean [title=" + title + ", fileName=" + fileName + ", fileUrl=" + fileUrl + ", nickName=" + nickName
+				+ ", no=" + no + "]";
 	}
+	
 	
 	
 	
