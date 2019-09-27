@@ -110,7 +110,7 @@
 		    	}).done(function(data){
 		    		if(data.status == "1"){
 		    			alert("삭제성공");
-		    			location.href="/home2";
+		    			location.href="/";
 		    		}else {
 		    	
 		    		}
