@@ -8,83 +8,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-	html, body{
-		margin: 0px;
-		padding: 0px;
-		box-sizing: border-box;
-		background-color: RGB(255, 255, 204);
-	}
-	
-	header {
-		text-align: center;
-	}
-	
-	header img {
-		display: inline-block;
-		width: 150px;
-	}
-	
-	section {
-		height: 600px;
-	}
-	
-	h2 {
-	}
-	
-	nav {
-		widht: 100%;
-		height: 50px;
-		background-color: black;
-	}
-	
-	footer {
-		width: 100%;
-		height: 200px;
-		background-color: black;
-	}
-	
-	.Container {
-		width: 100%;
-		padding: 0;
-	}
-	
-	.profileC {
-		width: calc((100% / 10) * 3.7);
-		display: inline-block;
-		float: left;
-	}
-	
-	.list {
-		width: calc((100% / 10) * 6);
-		display: inline-block;
-		padding: 0;
-	}
-	
-	.list-item {
-		border: 1px solid black;
-	}
-	
-	nav form {
-		display: inline-block;
-		height: 100%;
-	}
-	
-	nav form button {
-		height: 100%;
-		background-color: black;
-		color: white;
-	}
-	
-	.dn {
-		display: none;
-	}
-	
-	#create2 {
-		float : right;
-	}
-</style>
-<script type="text/javascript">
+<link rel="stylesheet" href="/resources/css/web2Home.css">
+<script>
 $(document).ready(function() {
 	var pro = {};
 	var imgUrl = "";
@@ -92,8 +17,8 @@ $(document).ready(function() {
 	var token ="";
 	var loCheck = false;
 	var storage = [];
-	if('<%= session.getAttribute("nick") %>' != 'null'){
-		imgUrl ='<%= session.getAttribute("imgUrl") %>';
+	if(`<%= session.getAttribute("nick") %>` != 'null'){
+		imgUrl = '<%= session.getAttribute("imgUrl") %>';
 		nick = '<%= session.getAttribute("nick") %>' ;
 		token = '<%= session.getAttribute("access_token") %>';
 		console.log(nick + " : " +  imgUrl + " token : " + token);
@@ -122,8 +47,9 @@ $(document).ready(function() {
 				if(storage.length > 0){
 					$(".list").empty();
 					for(var i = 0; i < storage.length; i++) {
-						var tag = '<li class="list-group-item">' + storage[i].title + '</li>';
-						$(".list").append(tag);
+						var listR = '<li class="list-group-item">' + storage[i].title + '</li>' + 
+								  '<div id="toggle">' + '</div>';
+						$(".list").append(listR);
 					}
 					
 					$(".list-group-item").on("click", function(){
@@ -151,8 +77,7 @@ $(document).ready(function() {
 	})
 	
 	select();
-	
-});
+});	
 </script>
 </head>
 <body>
@@ -183,5 +108,6 @@ $(document).ready(function() {
 		</article>
 	</section>
 	<footer>푸터</footer>
+
 </body>
 </html>
