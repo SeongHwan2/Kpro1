@@ -2,16 +2,21 @@ package kw.sw.web.service;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import kw.sw.web.beans.ListBean;
 import kw.sw.web.dao.Dao;
 
@@ -100,8 +105,6 @@ public class FileService {
 					fw.close();
 //					os.close();
 				}
-				
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -116,5 +119,19 @@ public class FileService {
 		System.out.println(lBean.toString());
 		System.out.println(fileName + " - " + url);
 		d.insert(lBean);
+	}
+	
+	public void FileDown(String path, String fileName, HttpServletResponse res) {
+		System.out.println(path + " ------ " + fileName);
+		try {
+			 InputStream input = new FileInputStream(path); 
+			 OutputStream output = res.getOutputStream(); 
+			 IOUtils.copy(input, output);
+			 res.setHeader("Content-Disposition", "attachment; filename=\"" + fileName +"\""); 
+			 input.close(); 
+			 output.close();
+			 } catch (Exception e) {
+				 e.printStackTrace(); 
+		 }
 	}
 }

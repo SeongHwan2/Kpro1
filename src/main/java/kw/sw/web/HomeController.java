@@ -1,32 +1,23 @@
 package kw.sw.web;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import kw.sw.web.beans.ListBean;
-import kw.sw.web.beans.joinBean;
 import kw.sw.web.dao.Dao;
+import kw.sw.web.service.FileService;
 import kw.sw.web.service.ListService;
 import net.sf.json.JSONObject;
 
@@ -43,7 +34,10 @@ public class HomeController {
 	@Autowired
 	ListService ls;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@Autowired
+	FileService fs;
+	
+	@RequestMapping("/")
 	public String home(Locale locale, Model model) {
 		return "web2Home";
 	}
@@ -104,17 +98,7 @@ public class HomeController {
 		String path = req.getParameter("url");
 		String fileName = req.getParameter("fileName");
 		System.out.println(path);
-		 try {
-			 InputStream input = new FileInputStream(path); 
-			 OutputStream output = res.getOutputStream(); 
-			 IOUtils.copy(input, output);
-			 res.setHeader("Content-Disposition", "attachment; filename=\"" + fileName +"\""); 
-			 input.close(); 
-			 output.close();
-			 } catch (Exception e) {
-				 e.printStackTrace(); 
-		 }
-		 
+		fs.FileDown(path, fileName, res); 
 	}
 
 	@RequestMapping("/ck")

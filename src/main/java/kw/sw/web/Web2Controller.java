@@ -117,19 +117,7 @@ public class Web2Controller {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert2(HttpServletRequest req , @RequestParam("file") MultipartFile[] files, HttpServletResponse res, ListBean lBean) {
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		String fileName = "";
-		String url = "";
-		String ext = "";
-		String originalfileName = "";
-		String nickName = lBean.getNickName();
-		String title = lBean.getTitle();
-		System.out.println(nickName);
-		System.out.println(title);
-
 		fs.fileUpload(lBean, files);
-
-//		d.insert(lBean);
 		return "redirect:/";
 	}
 	
