@@ -148,7 +148,7 @@
 		    <classifier>jdk15</classifier>
 		</dependency>
 		
-		<!-- Apache Commons Util (IO, FileUpLoad) IO >> Input & Output -->
+		<!-- Apache Commons Util (IO, FileUpLoad) IO >> Input & Output file다루기 -->
 		<dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
@@ -159,6 +159,7 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>1.4</version>
 		</dependency>
+		
 		<!-- validation (bean 예외 처리) -->
 		<dependency>
 		    <groupId>javax.validation</groupId>
