@@ -83,7 +83,8 @@ public class FileService {
 					//저장경로 + 파일명 정의
 //					String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 					String Path = "D:\\IDE\\workspace\\upload\\" + nickName + "\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
-					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + fileName + ext;
+//					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + fileName + ext;
+					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + title + ext;
 					System.out.println(url);
 //					req.setAttribute("url", url);
 					// 파일 객체 생셩
@@ -94,7 +95,8 @@ public class FileService {
 					}
 					
 					//출력 객체 생성 + 파일 객체 넣기  (저장경로 + uuid + 확장자)
-					FileWriter fw = new FileWriter(new File(Path + fileName + ext));
+//					FileWriter fw = new FileWriter(new File(Path + fileName + ext));
+					FileWriter fw = new FileWriter(new File(Path + title + ext));
 //					OutputStream os = new FileOutputStream(new File(Path + fileName + ext));
 					//가져온 데이터 출력 객체에 넣기
 					fw.write(sb.toString());
@@ -113,11 +115,12 @@ public class FileService {
 		
 		if(fileName != "") {
 			System.out.println(ext);
-			lBean.setFileName(originalfileName); //title + ext로 변경 예정!
+//			lBean.setFileName(originalfileName); //title + ext로 변경 예정!
+			lBean.setFileName(title + ext);
 			lBean.setFileUrl(url);
 		}
 		System.out.println(lBean.toString());
-		System.out.println(fileName + " - " + url);
+		System.out.println(fileName + " - " + title + url);
 		d.insert(lBean);
 	}
 	

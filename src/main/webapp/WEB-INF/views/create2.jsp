@@ -12,12 +12,6 @@
 		var index = -1;
 		var bIndex = -1;
 		
-		/* $('input[name=txt]').keydown(function() {
-			if (event.keyCode === 13) {
-			    event.preventDefault();
-			};
-		}); */
-			  
 		
 		if(location.search != ""){
 			index = location.search.replace("?", "").split("=")[1];
