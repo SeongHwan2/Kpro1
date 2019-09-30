@@ -25,10 +25,11 @@ public class Hadoop {
 	protected final String TARGET = "/part-r-00000";
 	protected Path inputPath = null;
 	protected Path outputPath = null;
-	
 	protected FileSystem localSystem = null;
 	protected FileSystem hadoopSystem = null;
 	protected String Rlocal = "";
+	
+	
 	public void run(String nickname, String fileName) throws IOException {
 		System.out.println("Hadoop Start!");
 		
@@ -67,6 +68,7 @@ public class Hadoop {
 			status = false;
 		}
 		System.out.println("hadoop init() >>> End");
+		System.out.println("Hadoop init 결과 :" + status);
 		return status;
 	}
 	
