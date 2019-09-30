@@ -148,6 +148,7 @@
 		<form action="/analy" method="post">
 			<button type="submit" id="analy" class="dn">분석시작</button>
 			<input type="text" name="fileName" class="dn">
+			<input type="text" name="nickName" class="dn">
 		</form>
 	</section>
 </body>
