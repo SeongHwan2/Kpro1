@@ -55,11 +55,7 @@ public class Hadoop {
 			//HADOOP 정제시 사용할 경로 정의
 			localSystem = FileSystem.getLocal(localConf);
 			hadoopSystem = FileSystem.get(hadoopConf);
-			/*
-			if(hadoopSystem.exists(new Path("/output"))) {
-				hadoopSystem.delete(new Path("/output"), true);
-			}
-			*/
+			
 			FileStatus[] fileList = localSystem.listStatus(new Path(Rlocal));
 			// 해당 사용자의 폴더 안에 저장된 파일 목록 확인!
 			for(int i = 0; i < fileList.length; i++) {
