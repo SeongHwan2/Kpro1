@@ -1,33 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+ <head>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+      $( document ).ready(function() {
+    	  
+    	  function dataParser() {
+        	  $.post("/analy", function(data){
+        		  if(data != null){
+        			  console.log(data);
+        		  }
+        		  
+        	  })
+          };
+    	  
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+          function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
-          ['Person', 'Speakers'],
-          ['nickname1', 170],
-          ['nickname2', 35],
-          ['nickname3', 28],
-          ['nickname4', 27],
-          ['nickname5', 76]
-        ]);
+            var data = google.visualization.arrayToDataTable([
+              ['Person', 'Speakers'],
+              ['nickname1', 170],
+              ['nickname2', 35],
+              ['nickname3', 28],
+              ['nickname4', 27],
+              ['nickname5', 76]
+            ]);
 
-        var options = {
-          title: '구성원별 채팅 비율',
-          pieHole: 0.3,
-        };
+            var options = {
+              title: '구성원별 채팅 비율',
+              pieHole: 0.3,
+            };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-        chart.draw(data, options);
-      }
-    </script>
+            chart.draw(data, options);
+          }
+          
+          
+    	  dataParser(); 
+    	  drawChart();
+      });
+      
+  </script>
   <title>Test Chart</title>
   </head>
   <body>

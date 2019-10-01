@@ -1,14 +1,18 @@
 package kw.sw.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import kw.sw.web.hdfs.Hadoop;
+import net.sf.json.JSONObject;
 
 @Controller
 public class HadoopController {
@@ -19,12 +23,16 @@ public class HadoopController {
 	}
 	
 	@PostMapping("/analy")
-	public String analyPost(HttpServletRequest req) throws IOException {
+	public String analyPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		Hadoop hadoop = new Hadoop();
 		String fileName = req.getParameter("fileName");
 		System.out.println(fileName);
 		String nickName = req.getParameter("nickName");
-		hadoop.run(nickName, fileName);
+		List<HashMap> result = hadoop.run(nickName, fileName);
+		System.out.println(result);
+		JSONObject Jobj = new JSONObject();
+		Jobj.put("result", result);
+		res.getWriter().write(Jobj.toString());
 		return "chart";
 	}
 }

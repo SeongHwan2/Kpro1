@@ -12,7 +12,7 @@ public class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 	//출력키 변수
 	protected Text textKey = new Text();
 	//출력 값 변수
-	protected IntWritable intValue = new IntWritable();
+	protected IntWritable intValue = new IntWritable(1);
 	
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context) throws IOException, InterruptedException {
@@ -22,20 +22,20 @@ public class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 		//출력키에 넣을 문자열 변수 선언
 		String strKey = values[0];
 		String strCom = "";
+		int length = strKey.length();
 		System.out.println(values.toString());
 		//count 변수 선언
 		int cnt = 0;
 		//출력키에 문자열 변수 적용
-		if(!(strKey.indexOf("[") == -1)) {
+		if((strKey.indexOf("[") > -1) && (length > 0)) {
 			strCom = strKey.replace("[", "") + ",";
 			textKey.set(strCom);
+			//출력값 변수에 문자열 변수 적용 (키)
+			
+			System.out.println(textKey + "------" + intValue);
+			context.write(textKey, intValue);
 		}
 		
-		
-		intValue = new IntWritable(1);
-		
-//		System.out.println(textKey + "------" + intValue);
-		context.write(textKey, intValue);
 		
 	}
 

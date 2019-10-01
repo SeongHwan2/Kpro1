@@ -46,14 +46,15 @@ public class Hadoop {
 	 * 2 : 처리 완료 (전체 정상 처리)
 	 **************************************************/
 	
-	public void run(String nickname, String fileName) throws IOException {
+	public List<HashMap> run(String nickname, String fileName) throws IOException {
 		System.out.println("Hadoop Start!");
+		List<HashMap> result = null;
 		int status = 0;
 		if(init(nickname, fileName)) {
 			if(fileCopy(fileName)) {
 				try {
 					if(mapReduce()) {
-						List<HashMap> result = resultData();
+						result = resultData();
 						System.out.println("파일 정제 완료");
 						status = 2;
 					}
@@ -63,8 +64,9 @@ public class Hadoop {
 				}
 			}
 		}
-		
 		System.out.println(status);
+		return result;
+		
 	}
 	
 	protected boolean init(String nickname, String fileName) {
@@ -179,15 +181,40 @@ public class Hadoop {
 			InputStream fsi = hadoopSystem.open(targetPath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fsi));
 			String str = "";
+			boolean status = true;
 			while((str = br.readLine()) != null) {
+				HashMap<String, Object> Smap = new HashMap<String, Object>();
+				String temp="";
 				String key[] = str.split(",");
 //				sb.append(str + "\r\n");
 				for(String b : key) {
 					System.out.println(b);
+					if(status) {
+						temp=b;
+						status=false;
+					}else {
+						Smap.put(temp, b.trim());
+						status=true;
+					}
+//					if(status) {
+////						System.out.println(b);
+//						Smap.put("key", b);
+////						sb.append(b);
+//						status = false;
+//					}else {
+//						Smap.put("value", b.trim());
+////						sb.append(" : " + b + "\\n");
+//						status = true;
+//					}
+						
 				}
+				resultList.add(Smap);
 			}
-//			System.out.println(sb.toString());
+			br.close();
+			fsi.close();
 		}
+		System.out.println(sb.toString());
+		System.out.println(resultList);
 		System.out.println("Hadoop resultData() >>> End");
 		return resultList;
 	}
