@@ -145,7 +145,7 @@
 			<input type="text" name="url" class="dn">
 			<input type="text" name="fileName" class="dn">
 		</form>
-		<form action="/analy" method="post">
+		<form action="/analy" method="GET">
 			<button type="submit" id="analy" class="dn">분석시작</button>
 			<input type="text" name="fileName" class="dn">
 			<input type="text" name="nickName" class="dn">

@@ -18,7 +18,11 @@ import kw.sw.web.hdfs.Hadoop;
 public class HadoopController {
 
 	@GetMapping("/analy")
-	public String analy() {
+	public String analy(HttpServletRequest req) {
+		String fileName = req.getParameter("fileName");
+		String nickName = req.getParameter("nickName");
+		req.setAttribute("fileName", fileName);
+		req.setAttribute("nickName", nickName);
 		return "chart";
 	}
 	
@@ -32,7 +36,8 @@ public class HadoopController {
 		System.out.println(result);
 		
 //		model.addAttribute("result", result);
-		req.setAttribute("result", result);
+//		req.setAttribute("fileName", fileName);
+//		req.setAttribute("nickName", nickName);
 		
 //		 JSONObject Jobj = new JSONObject(); 
 //		 Jobj.put("result", result);

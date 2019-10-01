@@ -7,18 +7,21 @@
    <script type="text/javascript">
    		
    		var data2 = [];
-    	  function dataParser() {
- /*        	  $.post("/analy", function(data){
-        		  if(data != null){
+    	  function dataParser(nickName, fileName) {
+         	  $.post("/analy", {"nickName" : nickName, "fileName" : fileName} , function(data){
+/*         		  if(data != null){
         			  console.log(data);
         		  }
-        		  
-        	  }) */
-        	  
-        	  data2 = `<%= request.getAttribute("result")%>`;
+ */        		
+ 				console.log("성공");
+ 				$("#loading").addClass("dn");
+ 				$("#piechart").css("display", "block");
+        	  }) 
+ <%--       		  data2 = `<%= request.getAttribute("result")%>`;
         	  console.log(data2);
         	  var data3 = JSON.parse(data2);
-        	  console.log(data3);
+        	  console.log(data3); --%>
+        	  console.log(nickName + "-----" + fileName);
           };
     	  
           google.charts.load('current', {'packages':['corechart']});
@@ -38,6 +41,8 @@
             var options = {
               title: '구성원별 채팅 비율',
               pieHole: 0.3,
+              width: 900,
+              heigth: 500,
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -45,14 +50,30 @@
             chart.draw(data, options);
           }
           
-      $( document ).ready(function() {    
-    		dataParser(); 
+      $( document ).ready(function() {
+    	  	var fileName = '<%=request.getAttribute("fileName") %>';
+    	  	var nickName = '<%=request.getAttribute("nickName")%>';
+    	  	$("#piechart").css("display", "none");
+//    	  	console.log(nickName + "----" + fileName);
+    		dataParser(nickName, fileName); 
       });
       
   </script>
+  <style>
+  	.dn {
+  		display: none;
+  	}
+  	
+  	
+  	#loading {
+  		width: 900px;
+  		height: 500px;
+  	}
+  </style>
   <title>Test Chart</title>
   </head>
   <body>
+  	<div id="loading">준비중</div>
     <div id="piechart" style="width: 900px; height: 500px;"></div>
     <canvas id="myChart"></canvas>
   </body>
