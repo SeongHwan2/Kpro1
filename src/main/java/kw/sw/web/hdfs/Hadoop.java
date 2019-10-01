@@ -1,7 +1,12 @@
 package kw.sw.web.hdfs;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
@@ -9,6 +14,11 @@ import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class Hadoop {
 
@@ -29,12 +39,32 @@ public class Hadoop {
 	protected FileSystem hadoopSystem = null;
 	protected String Rlocal = "";
 	
+	/**************************************************
+	 * >> 상태값 설정 << 
+	 * 0 : 접속 오류 (Hadoop 연결 문제 발생)
+	 * 1 : 정제 오류 (MapReduce 처리 문제 발생)
+	 * 2 : 처리 완료 (전체 정상 처리)
+	 **************************************************/
 	
 	public void run(String nickname, String fileName) throws IOException {
 		System.out.println("Hadoop Start!");
+		int status = 0;
+		if(init(nickname, fileName)) {
+			if(fileCopy(fileName)) {
+				try {
+					if(mapReduce()) {
+						List<HashMap> result = resultData();
+						System.out.println("파일 정제 완료");
+						status = 2;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					status = 1;
+				}
+			}
+		}
 		
-		System.out.println(init(nickname, fileName));
-		System.out.println(fileCopy(fileName));
+		System.out.println(status);
 	}
 	
 	protected boolean init(String nickname, String fileName) {
@@ -96,6 +126,70 @@ public class Hadoop {
 		System.out.println("hadoop fileCopy() >>> End");
 		System.out.println("fileCopy 결과 : " + status);
 		return status;
+	}
+	
+	//mapreduce 요청 메소드
+	protected boolean mapReduce() throws IOException, ClassNotFoundException, InterruptedException {
+		//시작 알림
+		System.out.println("Hadoop mapReduce() >>> Start!");
+		
+		if(hadoopSystem.exists(new Path("/output"))) {
+			hadoopSystem.delete(new Path("/output"), true);
+		}
+		//정제 작업 객체 생성
+		Job job = Job.getInstance(hadoopConf, "test");
+		//실행 대상 클래스 지정
+		job.setJarByClass(Hadoop.class);
+		//Mapper 객체 지정
+		job.setMapperClass(Map.class);
+		//Reducer 객체 지정
+		job.setReducerClass(Reduce.class);
+		//Mapper 객체 출력(키, value) 정의
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(IntWritable.class);
+		//정제 결과 출력 (키, value) 정의
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(IntWritable.class);
+		//작업시 생성될 테스크 정의
+		job.setNumReduceTasks(1);
+		
+		//원본 및 대상 경로 정의
+		FileInputFormat.addInputPath(job, inputPath);
+		FileOutputFormat.setOutputPath(job, outputPath);
+		//종료 알림
+		System.out.println("Hadoop mapReduce() >> End");
+		return job.waitForCompletion(true);
+	}
+	
+	//정제 완료된 데이터 불러오기
+
+	protected List<HashMap> resultData() throws IOException {
+		System.out.println("Hadoop resultData() >>> Start!");
+		List<HashMap> resultList = new ArrayList<HashMap>();
+		//정제 결과 데이터 경로 생성
+		Path targetPath = new Path(OUTPUT + TARGET);
+		// 문자열에 결과 담기 위한 변수
+		StringBuffer sb = new StringBuffer();
+		if(hadoopSystem.exists(targetPath)) {
+//			FSDataInputStream fsis = hadoopSystem.open(targetPath);
+//			int byteRead = 0;
+//			while((byteRead = fsis.read()) > 0) {
+//				sb.append((char)byteRead);
+//			}
+			InputStream fsi = hadoopSystem.open(targetPath);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fsi));
+			String str = "";
+			while((str = br.readLine()) != null) {
+				String key[] = str.split(",");
+//				sb.append(str + "\r\n");
+				for(String b : key) {
+					System.out.println(b);
+				}
+			}
+//			System.out.println(sb.toString());
+		}
+		System.out.println("Hadoop resultData() >>> End");
+		return resultList;
 	}
 	
 
