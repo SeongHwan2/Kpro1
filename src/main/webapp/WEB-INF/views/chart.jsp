@@ -2,17 +2,23 @@
 <!DOCTYPE html>
 <html>
  <head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <script type="text/javascript">
-      $( document ).ready(function() {
-    	  
+   		
+   		var data2 = [];
     	  function dataParser() {
-        	  $.post("/analy", function(data){
+ /*        	  $.post("/analy", function(data){
         		  if(data != null){
         			  console.log(data);
         		  }
         		  
-        	  })
+        	  }) */
+        	  
+        	  data2 = `<%= request.getAttribute("result")%>`;
+        	  console.log(data2);
+        	  var data3 = JSON.parse(data2);
+        	  console.log(data3);
           };
     	  
           google.charts.load('current', {'packages':['corechart']});
@@ -39,9 +45,8 @@
             chart.draw(data, options);
           }
           
-          
-    	  dataParser(); 
-    	  drawChart();
+      $( document ).ready(function() {    
+    		dataParser(); 
       });
       
   </script>

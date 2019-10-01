@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import kw.sw.web.hdfs.Hadoop;
-import net.sf.json.JSONObject;
 
 @Controller
 public class HadoopController {
@@ -23,16 +23,21 @@ public class HadoopController {
 	}
 	
 	@PostMapping("/analy")
-	public String analyPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public String analyPost(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
 		Hadoop hadoop = new Hadoop();
 		String fileName = req.getParameter("fileName");
 		System.out.println(fileName);
 		String nickName = req.getParameter("nickName");
 		List<HashMap> result = hadoop.run(nickName, fileName);
 		System.out.println(result);
-		JSONObject Jobj = new JSONObject();
-		Jobj.put("result", result);
-		res.getWriter().write(Jobj.toString());
+		
+//		model.addAttribute("result", result);
+		req.setAttribute("result", result);
+		
+//		 JSONObject Jobj = new JSONObject(); 
+//		 Jobj.put("result", result);
+//		 res.getWriter().write(Jobj.toString());
+		 
 		return "chart";
 	}
 }

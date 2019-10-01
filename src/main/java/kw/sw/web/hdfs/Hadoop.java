@@ -29,6 +29,7 @@ public class Hadoop {
 	//local Path 정의
 	protected String Local = "D:\\IDE\\workspace\\upload\\";
 	protected String hdfsUrl = "hdfs://192.168.3.125:9000";
+//	protected String hdfsUrl = "hdfs://192.168.3.240:9000"; //service server 주소
 	// HADOOP 정제 대상 경로, 처리 경로 객체설정
 	protected final String INPUT = "/input/";
 	protected final String OUTPUT = "/output";
@@ -64,7 +65,7 @@ public class Hadoop {
 				}
 			}
 		}
-		System.out.println(status);
+//		System.out.println(init(nickname,fileName));
 		return result;
 		
 	}
@@ -213,8 +214,7 @@ public class Hadoop {
 			br.close();
 			fsi.close();
 		}
-		System.out.println(sb.toString());
-		System.out.println(resultList);
+//		System.out.println(resultList);
 		System.out.println("Hadoop resultData() >>> End");
 		return resultList;
 	}
