@@ -123,7 +123,7 @@ public class Web2Controller {
 	
 	@RequestMapping("/chart")
 	public String chart() {
-		return "chartjs";
+		return "chart";
 	}
 	
 

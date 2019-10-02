@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
  <head>
+ <link rel="stylesheet" href="/resources/css/chart.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <script type="text/javascript">
@@ -9,10 +10,10 @@
    		var data2 = [];
     	  function dataParser(nickName, fileName) {
          	  $.post("/analy", {"nickName" : nickName, "fileName" : fileName} , function(data){
-/*         		  if(data != null){
-        			  console.log(data);
+         		  if(data != null){
+        			  console.log(data.result);
         		  }
- */        		
+         		
  				console.log("성공");
  				$("#loading").addClass("dn");
  				$("#piechart").css("display", "block");
@@ -41,6 +42,7 @@
             var options = {
               title: '구성원별 채팅 비율',
               pieHole: 0.3,
+              chartArea: {left:0,top:0,width:"100%",height:"100%"},
               width: 900,
               heigth: 500,
             };
@@ -59,21 +61,14 @@
       });
       
   </script>
-  <style>
-  	.dn {
-  		display: none;
-  	}
-  	
-  	
-  	#loading {
-  		width: 900px;
-  		height: 500px;
-  	}
-  </style>
+  
   <title>Test Chart</title>
   </head>
   <body>
-  	<div id="loading">준비중</div>
+  	<div id="loading">
+  		<h1>결과 분석 중입니다.</h1>
+  		<img src="/resources/img/tenor.gif" style="width:900px; height: 500px;">
+  	</div>
     <div id="piechart" style="width: 900px; height: 500px;"></div>
     <canvas id="myChart"></canvas>
   </body>

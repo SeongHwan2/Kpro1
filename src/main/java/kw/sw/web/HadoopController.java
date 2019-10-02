@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import kw.sw.web.hdfs.Hadoop;
+import net.sf.json.JSONObject;
 
 @Controller
 public class HadoopController {
@@ -27,7 +28,7 @@ public class HadoopController {
 	}
 	
 	@PostMapping("/analy")
-	public String analyPost(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
+	public void analyPost(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
 		Hadoop hadoop = new Hadoop();
 		String fileName = req.getParameter("fileName");
 		System.out.println(fileName);
@@ -39,10 +40,9 @@ public class HadoopController {
 //		req.setAttribute("fileName", fileName);
 //		req.setAttribute("nickName", nickName);
 		
-//		 JSONObject Jobj = new JSONObject(); 
-//		 Jobj.put("result", result);
-//		 res.getWriter().write(Jobj.toString());
+		 JSONObject Jobj = new JSONObject(); 
+		 Jobj.put("result", result);
+		 res.getWriter().write(Jobj.toString());
 		 
-		return "chart";
 	}
 }
