@@ -16,7 +16,7 @@
          			 console.log("DataSet Make 시작");
 //        			  console.log(data);
 //        			  console.log(data.result);
-        			  Pdata = data.result
+        			  Pdata = data.result;
 //        			  console.log(Pdata);
 //        			  console.log(Pdata.length);
 //	       			  console.log(data.result.get("key"));
@@ -63,7 +63,7 @@
 
           function drawChart() {
         	console.log("drawChart() >>> start!");  
-            var data = new google.visualization.DataTable(dataSet);
+            var data = new google.visualization.DataTable();
             data.addColumn('string', 'Person');
             data.addColumn('number', 'TellCount');
             
