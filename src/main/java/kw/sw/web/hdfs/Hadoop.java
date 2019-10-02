@@ -190,23 +190,23 @@ public class Hadoop {
 //				sb.append(str + "\r\n");
 				for(String b : key) {
 					System.out.println(b);
-					if(status) {
-						temp=b;
-						status=false;
-					}else {
-						Smap.put(temp, b.trim());
-						status=true;
-					}
 //					if(status) {
-////						System.out.println(b);
-//						Smap.put("key", b);
-////						sb.append(b);
-//						status = false;
+//						temp=b;
+//						status=false;
 //					}else {
-//						Smap.put("value", b.trim());
-////						sb.append(" : " + b + "\\n");
-//						status = true;
+//						Smap.put(temp, b.trim());
+//						status=true;
 //					}
+					if(status) {
+//						System.out.println(b);
+						Smap.put("key", b);
+//						sb.append(b);
+						status = false;
+					}else {
+						Smap.put("value", b.trim());
+//						sb.append(" : " + b + "\\n");
+						status = true;
+					}
 						
 				}
 				resultList.add(Smap);

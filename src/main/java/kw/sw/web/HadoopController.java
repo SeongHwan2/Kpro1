@@ -42,7 +42,14 @@ public class HadoopController {
 		
 		 JSONObject Jobj = new JSONObject(); 
 		 Jobj.put("result", result);
-		 res.getWriter().write(Jobj.toString());
+		 
+		 try {
+			res.setCharacterEncoding("UTF-8");
+			res.setContentType("application/json; charset=UTF-8");
+			res.getWriter().write(Jobj.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		 
 	}
 }
