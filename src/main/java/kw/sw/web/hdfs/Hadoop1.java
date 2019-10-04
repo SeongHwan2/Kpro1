@@ -20,7 +20,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-public class Hadoop {
+public class Hadoop1 {
 
 	protected HashMap<String, Object> resultMap;
 	// local 및 hadoop 설정 객체 선언
@@ -55,8 +55,8 @@ public class Hadoop {
 			if(fileCopy(fileName)) {
 				try {
 					if(mapReduce(index)) {
-//						result = resultData();
-//						System.out.println("파일 정제 완료");
+						result = resultData();
+						System.out.println("파일 정제 완료");
 						status = 2;
 					}
 				} catch (Exception e) {
@@ -143,11 +143,11 @@ public class Hadoop {
 		//정제 작업 객체 생성
 		Job job = Job.getInstance(hadoopConf, "test");
 		//실행 대상 클래스 지정
-		job.setJarByClass(Hadoop.class);
+		job.setJarByClass(Hadoop1.class);
 		//Mapper 객체 지정
-		job.setMapperClass(Map1.class);
+		job.setMapperClass(Map.class);
 		//Reducer 객체 지정
-		job.setReducerClass(Reduce1.class);
+		job.setReducerClass(Reduce.class);
 		//Mapper 객체 출력(키, value) 정의
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -158,8 +158,8 @@ public class Hadoop {
 		job.setNumReduceTasks(1);
 		
 		//원본 및 대상 경로 정의
-//		FileInputFormat.addInputPath(job, inputPath);
-//		FileOutputFormat.setOutputPath(job, outputPath);
+		FileInputFormat.addInputPath(job, inputPath);
+		FileOutputFormat.setOutputPath(job, outputPath);
 		//종료 알림
 		System.out.println("Hadoop mapReduce() >> End");
 //		status = true;
