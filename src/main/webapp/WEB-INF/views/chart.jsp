@@ -12,8 +12,8 @@ $(document).ready(function() {
     var nickName = '<%=request.getAttribute("nickName")%>';
     $("#piechart").css("display", "none");
 //  console.log(nickName + "----" + fileName);
-    dataParser(nickName, fileName);
-    click();
+    dataParser(nickName, fileName, index);
+    click(nickName, fileName);
 });   
   </script>
   
@@ -26,9 +26,10 @@ $(document).ready(function() {
   	</div>
     <div id="piechart" style="width: 100%; height: 700px;"></div>
     <form action="">
-    	<button type="button" id="person" value="0">인원별</button>
-    	<button type="button" id="time" value="1">시간대별</button>
-    	<button type="button" id="keyword" value="2">키워드별</button>
+    	<button type="button" id="person">인원별</button>
+    	<button type="button" id="time">시간대별</button>
+    	<button type="button" id="keyword">키워드별</button>
+    	<button type="button">홈</button>
     </form>
   </body>
 </html>

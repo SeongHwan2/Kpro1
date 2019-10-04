@@ -33,7 +33,9 @@ public class HadoopController {
 		String fileName = req.getParameter("fileName");
 		System.out.println(fileName);
 		String nickName = req.getParameter("nickName");
-		List<HashMap> result = hadoop.run(nickName, fileName);
+		String index = req.getParameter("index");
+//		System.out.println(index);
+		List<HashMap> result = hadoop.run(nickName, fileName, index);
 		System.out.println(result);
 		
 //		model.addAttribute("result", result);

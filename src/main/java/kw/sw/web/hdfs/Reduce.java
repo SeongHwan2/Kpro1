@@ -18,7 +18,7 @@ public class Reduce extends Reducer<Text, IntWritable, Text, IntWritable> {
 		
 		for(IntWritable v : value) {
 			sum += v.get();
-		}
+		};
 		
 		result.set(sum);
 		System.out.println(result);

@@ -1,9 +1,10 @@
    		var dataSet = [];
    		var Pdata = [];
    		var map = new Map();
-    	  function dataParser(nickName, fileName) {
-    		  console.log("dataParser() >>> start!");
-         	  $.post("/analy", {"nickName" : nickName, "fileName" : fileName} , function(data){
+   		var index = 0;
+    	  function dataParser(nickName, fileName, index) {
+    		  console.log("dataParser() : " + index +  ">>> start!");
+         	  $.post("/analy", {"nickName" : nickName, "fileName" : fileName, "index" : index}, function(data){
          		  if(data != null){
          			 console.log("DataSet Make Start!");
 //        			  console.log(data);
@@ -75,11 +76,17 @@
             console.log("drawChart() >>> End!");
           };
           
-          function click(){
+          function click(nickName, fileName){
         	  $("form button:button").on("click", function(){
-            	  var index = $(this).index();
-            	  console.log("button click");
+            	  index = $(this).index();
+//            	  console.log("button click");
             	  console.log(index);
+            	  if(index == 3){
+            		  history.back();
+            	  }else {
+            		  dataParser(nickName, fileName, index);
+            	  };
+            	  
+            	  
               });
           };
-          
