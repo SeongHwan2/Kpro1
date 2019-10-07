@@ -55,8 +55,8 @@ public class Hadoop1 {
 			if(fileCopy(fileName)) {
 				try {
 					if(mapReduce(index)) {
-						result = resultData();
-						System.out.println("파일 정제 완료");
+//						result = resultData();
+//						System.out.println("파일 정제 완료");
 						status = 2;
 					}
 				} catch (Exception e) {
@@ -145,12 +145,12 @@ public class Hadoop1 {
 		//실행 대상 클래스 지정
 		job.setJarByClass(Hadoop1.class);
 		//Mapper 객체 지정
-		job.setMapperClass(Map.class);
+		job.setMapperClass(Map1.class);
 		//Reducer 객체 지정
-		job.setReducerClass(Reduce.class);
+		job.setReducerClass(Reduce1.class);
 		//Mapper 객체 출력(키, value) 정의
 		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(IntWritable.class);
+		job.setMapOutputValueClass(Text.class);
 		//정제 결과 출력 (키, value) 정의
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
