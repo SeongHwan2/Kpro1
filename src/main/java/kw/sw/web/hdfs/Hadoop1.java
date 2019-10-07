@@ -54,7 +54,7 @@ public class Hadoop1 {
 		if(init(nickname, fileName)) {
 			if(fileCopy(fileName)) {
 				try {
-					if(mapReduce(index)) {
+					if(mapReduce()) {
 //						result = resultData();
 //						System.out.println("파일 정제 완료");
 						status = 2;
@@ -132,7 +132,7 @@ public class Hadoop1 {
 	}
 	
 	//mapreduce 요청 메소드
-	protected boolean mapReduce(String index) throws IOException, ClassNotFoundException, InterruptedException {
+	protected boolean mapReduce() throws IOException, ClassNotFoundException, InterruptedException {
 		boolean status = false;
 		//시작 알림
 		System.out.println("Hadoop mapReduce() >>> Start!");
@@ -152,10 +152,10 @@ public class Hadoop1 {
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
 		//정제 결과 출력 (키, value) 정의
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+//		job.setOutputKeyClass(Text.class);
+//		job.setOutputValueClass(Text.class);
 		//작업시 생성될 테스크 정의
-		job.setNumReduceTasks(1);
+//		job.setNumReduceTasks(1);
 		
 		//원본 및 대상 경로 정의
 		FileInputFormat.addInputPath(job, inputPath);

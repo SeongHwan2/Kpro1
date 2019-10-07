@@ -47,16 +47,16 @@ public class Hadoop {
 	 * 2 : 처리 완료 (전체 정상 처리)
 	 **************************************************/
 	
-	public List<HashMap> run(String nickname, String fileName, String index) throws IOException {
-		System.out.println("Hadoop" + index +  " Start!");
+	public List<HashMap> run(String nickname, String fileName) throws IOException {
+		System.out.println("Hadoop Start!");
 		List<HashMap> result = null;
 		int status = 0;
 		if(init(nickname, fileName)) {
 			if(fileCopy(fileName)) {
 				try {
-					if(mapReduce(index)) {
-//						result = resultData();
-//						System.out.println("파일 정제 완료");
+					if(mapReduce()) {
+						result = resultData();
+						System.out.println("파일 정제 완료");
 						status = 2;
 					}
 				} catch (Exception e) {
@@ -132,8 +132,8 @@ public class Hadoop {
 	}
 	
 	//mapreduce 요청 메소드
-	protected boolean mapReduce(String index) throws IOException, ClassNotFoundException, InterruptedException {
-		boolean status = false;
+	protected boolean mapReduce() throws IOException, ClassNotFoundException, InterruptedException {
+//		boolean status = false;
 		//시작 알림
 		System.out.println("Hadoop mapReduce() >>> Start!");
 		

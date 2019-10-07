@@ -6,13 +6,13 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class Reduce1 extends Reducer<Text, Text, Text, IntWritable> {
+public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 
 	//출력값 변수 선언
 	Text result = new Text();
 
 	@Override
-	protected void reduce(Text key, Iterable<Text> value, Reducer<Text, Text, Text, IntWritable>.Context context) throws IOException, InterruptedException {
+	protected void reduce(Text key, Iterable<Text> value, Reducer<Text, Text, Text, Text>.Context context) throws IOException, InterruptedException {
 		// 결합변수 설정
 //		int sum = 0;
 //		
@@ -24,10 +24,12 @@ public class Reduce1 extends Reducer<Text, Text, Text, IntWritable> {
 		
 		
 		for(Text v : value) {
-			result.set(v);
+			System.out.println(v);
+//			result.set(v);
+//			System.out.println(result);
 		}
 		
-		System.out.println(result);
+		
 		
 //		context.write(key, result);
 	}
