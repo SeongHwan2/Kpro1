@@ -35,6 +35,8 @@ public class Map1 extends Mapper<LongWritable, Text, Text, Text> {
 			strValC = "";
 			strVal2 = values[2];
 			length = strKey.length();
+		} else {
+			return;
 		}
 		//count 변수 선언
 		int cnt = 0;
@@ -50,6 +52,7 @@ public class Map1 extends Mapper<LongWritable, Text, Text, Text> {
 			textValue.set(strValC + "," + strVal2.trim());
 		}
 		System.out.println(textKey + " " + textValue);
+		
 		context.write(textKey, textValue);
 		
 	}

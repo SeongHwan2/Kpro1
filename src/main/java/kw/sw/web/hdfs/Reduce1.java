@@ -24,7 +24,7 @@ public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 		
 		
 		for(Text v : value) {
-			System.out.println(v);
+			System.out.println(key + " : " + v.toString());
 //			result.set(v);
 //			System.out.println(result);
 		}
