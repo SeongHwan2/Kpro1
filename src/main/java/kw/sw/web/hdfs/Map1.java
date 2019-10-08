@@ -42,7 +42,7 @@ public class Map1 extends Mapper<LongWritable, Text, Text, Text> {
 		int cnt = 0;
 		//출력키에 문자열 변수 적용
 		if((strKey.indexOf("[") > -1) && (length > 0)) {
-			strCom = strKey.replace("[", "") + ",";
+			strCom = strKey.replace("[", "");
 			//출력값 변수에 문자열 변수 적용 (키)
 			textKey.set(strCom);	
 		}
