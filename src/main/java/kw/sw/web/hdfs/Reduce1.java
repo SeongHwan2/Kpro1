@@ -1,13 +1,19 @@
 package kw.sw.web.hdfs;
 
 import java.io.IOException;
-
-import org.apache.hadoop.io.IntWritable;
+import java.util.HashMap;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.ibatis.session.SqlSession;
+
+import kw.sw.web.mybatis.mybatisApp;
+
 
 public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 
+	
+	SqlSession session = mybatisApp.sqlSessionFactory.openSession();
+	
 	//출력값 변수 선언
 	Text result = new Text();
 	
@@ -28,13 +34,24 @@ public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 		
 		
 		for(Text v : value) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
 //			System.out.println(key + " : " + v.toString());
 			values = v.toString().split(",");
-			v1 = values[0];
-			v2 = values[1];
+			v1 = values[0].trim();
+			v2 = values[1].trim();
+			
+			map.put("nickname", key.toString());
+			map.put("date", v1);
+			map.put("msg", v2);
+			System.out.println(map.toString());
+			session.insert("sql.dataInsert", map);
+			session.commit();
+			
+			
 //			result.set(v);
 //			System.out.println(result);
-			System.out.println("닉네임 : " + key + " 시간 : " + v1.trim() + " 대화내용 : " + v2.trim());
+//			System.out.println("닉네임 : " + key + " 시간 : " + v1 + " 대화내용 : " + v2);
+			
 		}
 		
 		

@@ -44,4 +44,9 @@ public class Dao {
 	public int delete(ListBean lBean) {
 		return session.update("sql.delete", lBean);
 	}
+	
+	public void dataInsert(HashMap<String, Object> map) {
+		System.out.println(map.get("nickname") + " " + map.get("date") + " " + map.get("msg"));
+		session.insert("sql.dataInsert", map);
+	}
 }

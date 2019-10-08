@@ -32,4 +32,9 @@
   <update id="delete" parameterType="kw.sw.web.beans.ListBean">
   	UPDATE `Notice` SET `delYn` = 'Y' WHERE `no` = ${no}
   </update>
+  
+  <insert id="dataInsert" parameterType="hashmap">
+  	insert into `Data` (`nickname`, `date`, `msg`, `delYn`) values (#{nickname}, #{date}, #{msg}, 'N')
+  </insert>
+  
 </mapper>
