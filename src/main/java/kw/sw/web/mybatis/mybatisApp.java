@@ -22,5 +22,4 @@ public class mybatisApp {
 			e.printStackTrace();
 		}		
 	}
-
 }
