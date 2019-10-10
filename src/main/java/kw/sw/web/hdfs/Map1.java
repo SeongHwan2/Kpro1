@@ -31,10 +31,13 @@ public class Map1 extends Mapper<LongWritable, Text, Text, Text> {
 		if(values.length > 1) {
 			//출력키에 넣을 문자열 변수 선언
 			strKey = values[0];
-			strVal1 = values[1];
-			strValC = "";
-			strVal2 = values[2];
-			length = strKey.length();
+			if(strKey.indexOf("[출처]") == -1) {
+				strVal1 = values[1];
+				strValC = "";
+				strVal2 = values[2];
+				length = strKey.length();
+			}
+			
 		} else {
 			return;
 		}
