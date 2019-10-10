@@ -25,7 +25,7 @@ $(document).ready(function() {
   		<img src="/resources/img/tenor.gif" style="width:100%; height: 500px;">
   	</div>
     <div id="piechart" style="width: 100%; height: 700px;"></div>
-    <form action="">
+    <form action="" id="buttonC" class="dn">
     	<button type="button" id="person">인원별</button>
     	<button type="button" id="time">시간대별</button>
     	<button type="button" id="keyword">키워드별</button>

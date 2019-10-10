@@ -2,6 +2,8 @@ package kw.sw.web.hdfs;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.ibatis.session.SqlSession;
@@ -32,7 +34,6 @@ public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 		
 //		result.set(sum);
 		
-		
 		for(Text v : value) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 //			System.out.println(key + " : " + v.toString());
@@ -46,20 +47,18 @@ public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 			System.out.println(map.toString());
 			session.insert("sql.dataInsert", map);
 			session.commit();
-			
-			
 //			result.set(v);
 //			System.out.println(result);
 //			System.out.println("닉네임 : " + key + " 시간 : " + v1 + " 대화내용 : " + v2);
-			
 		}
 		
-		
-		
-		
+//		int cnt = result.get(0).get("cnt") ;
+//		System.out.println(cnt);
+//		if(a > 0) {
+//			System.out.println("data 정제 & 저장 완료");
+//		}
 		
 //		context.write(key, result);
 	}
-	
 	
 }

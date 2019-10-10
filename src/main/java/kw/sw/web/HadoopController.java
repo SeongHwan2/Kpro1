@@ -38,12 +38,8 @@ public class HadoopController {
 		String index = req.getParameter("index");
 //		System.out.println(index);
 //		List<HashMap> result = hadoop.run(nickName, fileName);
-		List<HashMap> result = hadoop1.run(nickName, fileName, index);
+		List<HashMap<String, Object>> result = hadoop1.run(nickName, fileName);
 		System.out.println(result);
-		
-//		model.addAttribute("result", result);
-//		req.setAttribute("fileName", fileName);
-//		req.setAttribute("nickName", nickName);
 		
 		 JSONObject Jobj = new JSONObject(); 
 		 Jobj.put("result", result);

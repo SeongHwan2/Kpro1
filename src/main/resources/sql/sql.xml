@@ -37,4 +37,19 @@
   	insert into `Data` (`nickname`, `date`, `msg`, `delYn`) values (#{nickname}, #{date}, #{msg}, 'N')
   </insert>
   
+  <select id="dataCheck" resultType="hashmap">
+  	select count(`nickname`) as cnt from `Data`
+  </select>
+  
+  <select id="nick" resultType="hashmap">
+  	SELECT `nickname`, COUNT(`msg`) AS cnt FROM `Data` GROUP BY `nickname`
+  </select>
+  
+  <select id="time" resultType="hashmap">
+  	SELECT `date`, COUNT(`msg`) AS cnt FROM `Data` GROUP BY `date`
+  </select>
+  
+  <update id="truncate">
+  	truncate table `Data`
+  </update>
 </mapper>

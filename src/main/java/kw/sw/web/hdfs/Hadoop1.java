@@ -19,10 +19,13 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.ibatis.session.SqlSession;
+
+import kw.sw.web.mybatis.mybatisApp;
 
 public class Hadoop1 {
 
-	protected HashMap<String, Object> resultMap;
+	protected HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	// local 및 hadoop 설정 객체 선언
 	protected Configuration localConf = null;
 	protected Configuration hadoopConf = null;
@@ -47,16 +50,20 @@ public class Hadoop1 {
 	 * 2 : 처리 완료 (전체 정상 처리)
 	 **************************************************/
 	
-	public List<HashMap> run(String nickname, String fileName, String index) throws IOException {
-		System.out.println("Hadoop" + index +  " Start!");
-		List<HashMap> result = null;
+	public List<HashMap<String, Object>> run(String nickname, String fileName) throws IOException {
+		System.out.println("Hadoop" + " Start!");
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String,Object>>();
 		int status = 0;
 		if(init(nickname, fileName)) {
 			if(fileCopy(fileName)) {
 				try {
 					if(mapReduce()) {
-//						result = resultData();
-//						System.out.println("파일 정제 완료");
+						if(checkData()) {
+							resultMap.put("status", "true");
+							result.add(resultMap);
+						}
+						System.out.println(result.toString());
+						System.out.println("파일 정제 완료");
 						status = 2;
 					}
 				} catch (Exception e) {
@@ -169,57 +176,71 @@ public class Hadoop1 {
 	}
 	
 	//정제 완료된 데이터 불러오기
-	protected List<HashMap> resultData() throws IOException {
-		System.out.println("Hadoop resultData() >>> Start!");
-		List<HashMap> resultList = new ArrayList<HashMap>();
-		//정제 결과 데이터 경로 생성
-		Path targetPath = new Path(OUTPUT + TARGET);
-		// 문자열에 결과 담기 위한 변수
-		StringBuffer sb = new StringBuffer();
-		if(hadoopSystem.exists(targetPath)) {
-//			FSDataInputStream fsis = hadoopSystem.open(targetPath);
-//			int byteRead = 0;
-//			while((byteRead = fsis.read()) > 0) {
-//				sb.append((char)byteRead);
-//			}
-			InputStream fsi = hadoopSystem.open(targetPath);
-			BufferedReader br = new BufferedReader(new InputStreamReader(fsi));
-			String str = "";
-			boolean status = true;
-			while((str = br.readLine()) != null) {
-				HashMap<String, Object> Smap = new HashMap<String, Object>();
-//				String temp="";
-				String key[] = str.split(",");
-//				sb.append(str + "\r\n");
-				for(String b : key) {
-					System.out.println(b);
-//					if(status) {
-//						temp=b;
-//						status=false;
-//					}else {
-//						Smap.put(temp, b.trim());
-//						status=true;
-//					}
-					if(status) {
-//						System.out.println(b);
-						Smap.put("key", b);
-//						sb.append(b);
-						status = false;
-					}else {
-						Smap.put("value", b.trim());
-//						sb.append(" : " + b + "\\n");
-						status = true;
-					}
-						
-				}
-				resultList.add(Smap);
-			}
-			br.close();
-			fsi.close();
+	protected boolean checkData() throws IOException {
+		SqlSession session = mybatisApp.sqlSessionFactory.openSession();
+		System.out.println("Hadoop checkData() >>> Start!");
+		boolean status = false;
+		
+		//dataBase check!!
+		List<HashMap> result = session.selectList("sql.dataCheck");
+		System.out.println(result.get(0).get("cnt").toString());
+		String cnt = result.get(0).get("cnt").toString();
+		
+		if(!("0").equals(cnt)) {
+			status = true;
+			session.close();
 		}
+		
+		System.out.println(status);
+//		List<HashMap> resultList = new ArrayList<HashMap>();
+		//정제 결과 데이터 경로 생성
+//		Path targetPath = new Path(OUTPUT + TARGET);
+		// 문자열에 결과 담기 위한 변수
+//		StringBuffer sb = new StringBuffer();
+//		if(hadoopSystem.exists(targetPath)) {
+////			FSDataInputStream fsis = hadoopSystem.open(targetPath);
+////			int byteRead = 0;
+////			while((byteRead = fsis.read()) > 0) {
+////				sb.append((char)byteRead);
+////			}
+//			InputStream fsi = hadoopSystem.open(targetPath);
+//			BufferedReader br = new BufferedReader(new InputStreamReader(fsi));
+//			String str = "";
+//			boolean status = true;
+//			while((str = br.readLine()) != null) {
+//				HashMap<String, Object> Smap = new HashMap<String, Object>();
+////				String temp="";
+//				String key[] = str.split(",");
+////				sb.append(str + "\r\n");
+//				for(String b : key) {
+//					System.out.println(b);
+////					if(status) {
+////						temp=b;
+////						status=false;
+////					}else {
+////						Smap.put(temp, b.trim());
+////						status=true;
+////					}
+//					if(status) {
+////						System.out.println(b);
+//						Smap.put("key", b);
+////						sb.append(b);
+//						status = false;
+//					}else {
+//						Smap.put("value", b.trim());
+////						sb.append(" : " + b + "\\n");
+//						status = true;
+//					}
+//						
+//				}
+//				resultList.add(Smap);
+//			}
+//			br.close();
+//			fsi.close();
+//		}
 //		System.out.println(resultList);
-		System.out.println("Hadoop resultData() >>> End");
-		return resultList;
+		System.out.println("Hadoop checkData() >>> End");
+		return status;
 	}
 	
 

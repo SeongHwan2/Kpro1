@@ -1,6 +1,7 @@
 package kw.sw.web.dao;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,5 +49,23 @@ public class Dao {
 	public void dataInsert(HashMap<String, Object> map) {
 		System.out.println(map.get("nickname") + " " + map.get("date") + " " + map.get("msg"));
 		session.insert("sql.dataInsert", map);
+	}
+	
+	public List<HashMap<String, Object>> nickSelect() {
+		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		resultList = session.selectList("sql.nick");
+		System.out.println(resultList.toString());
+		return resultList;
+	}
+	
+	public List<HashMap<String, Object>> timeSelect() {
+		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		resultList = session.selectList("sql.time");
+		System.out.println(resultList.toString());
+		return resultList;
+	}
+	
+	public void truncate() {
+		session.update("sql.truncate");
 	}
 }
