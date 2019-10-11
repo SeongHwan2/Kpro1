@@ -10,18 +10,18 @@
 		<property name="maxInMemorySize" value="10485760"></property>
 	</bean>	  	
   	
-<!-- 	<bean id="dataSource" 
+ 	<bean id="dataSource" 
 		  class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
 		  p:driverClassName="org.mariadb.jdbc.Driver"
 		  p:url="jdbc:mysql://gdj16.gudi.kr:53306/m12"
 		  p:username="m12"
-		  p:password="m12"/> -->
+		  p:password="m12"/> 
 
 	<!-- DataSource : JDBC -->
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+<!-- 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
    		<property name="jndiName" value="java:/comp/env/jdbc/mariadb" />
    		<property name="resourceRef" value="true" />
-   	</bean>
+   	</bean> -->
 		  
 	<bean id="sqlSessionFactory" 
 		  class="org.mybatis.spring.SqlSessionFactoryBean"
