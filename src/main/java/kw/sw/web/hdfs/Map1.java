@@ -28,7 +28,7 @@ public class Map1 extends Mapper<LongWritable, Text, Text, Text> {
 		String strVal2 = "";
 		String strValC = "";
 		int length = 0;
-		if(values.length > 1) {
+		if(values.length > 2) {
 			//출력키에 넣을 문자열 변수 선언
 			strKey = values[0];
 			//출력 value 문자열 변수 선언 & 정의
