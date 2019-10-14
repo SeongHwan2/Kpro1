@@ -97,8 +97,8 @@ public class Hadoop1 {
 			outputPath = new Path(OUTPUT);
 			
 			//HADOOP 정제시 사용할 경로 정의
-//			localSystem = FileSystem.getLocal(localConf);
-			localSystem = FileSystem.get(localConf);
+			localSystem = FileSystem.getLocal(localConf);
+//			localSystem = FileSystem.get(localConf);
 			hadoopSystem = FileSystem.get(hadoopConf);
 			
 			FileStatus[] fileList = localSystem.listStatus(new Path(Rlocal));
