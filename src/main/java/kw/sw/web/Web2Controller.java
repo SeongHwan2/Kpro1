@@ -60,7 +60,6 @@ public class Web2Controller {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@RequestMapping("/KakaoBack")

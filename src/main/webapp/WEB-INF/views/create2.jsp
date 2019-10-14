@@ -128,7 +128,7 @@
 			<input type="text" name="title" placeholder="파일의 이름을 지정해 주세요" class="tb di" required="required"></p>
 			<div>
 			<label>첨부파일</label>
-			<input type="file" multiple="multiple" name="file" class="di"  accept="image/*, .txt, .pdf, .opd">
+			<input type="file" multiple="multiple" name="file" class="di"  accept=".txt">
 			<input type="text" id="fList"class="dn di">
 			</div>
 			</p>
