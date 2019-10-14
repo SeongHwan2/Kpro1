@@ -39,7 +39,7 @@ public class FileService {
 		if(files.length > 0) {
 			//파일 업로드 부분!!
 			try {
-	//			req.setCharacterEncoding("UTF-8"); >> MultipartFile에 받아질시에 깨져서 들어오기때문에 req에 넣어줘도 필터가 되지 않음! 필터를 넣어줘야 spring이 알아서 처리해서 받아옴
+//				req.setCharacterEncoding("UTF-8"); >> MultipartFile에 받아질시에 깨져서 들어오기때문에 req에 넣어줘도 필터가 되지 않음! 필터를 넣어줘야 spring이 알아서 처리해서 받아옴
 				for(int i = 0; i < files.length; i++) {
 					MultipartFile file = files[i];
 					System.out.println(file.getOriginalFilename());
@@ -82,9 +82,10 @@ public class FileService {
 //					System.out.println(an);
 					//저장경로 + 파일명 정의
 //					String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
-					String Path = "D:\\IDE\\workspace\\upload\\" + nickName + "\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
-//					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + fileName + ext;
-					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + title + ext;
+//					String Path = "D:\\IDE\\workspace\\upload\\" + nickName + "\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
+					String Path = "/home/ysh/" + nickName + "/";
+					url = "/home/ysh/upload/" + nickName + "/" + title + ext;
+//					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + title + ext;
 					System.out.println(url);
 //					req.setAttribute("url", url);
 					// 파일 객체 생셩

@@ -61,8 +61,8 @@
 							$("input[name=fileName]").val(storage[index].fileName);
 						}
 						if (storage[index].nickName == nickname || nickname == "주인장" || nickname == "관리자"){
-							$("#update").removeClass("dn");
-							$("#delete").removeClass("dn");
+//							$("#update").removeClass("dn");
+//							$("#delete").removeClass("dn");
 							$("textarea[name=txt]").attr("disabled", false);
 						}
 						var filename = (storage[index].fileName != null) ? storage[index].fileName : "업로드된 파일 없음";

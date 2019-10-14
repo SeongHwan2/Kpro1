@@ -38,8 +38,11 @@ public class Reduce1 extends Reducer<Text, Text, Text, Text> {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 //			System.out.println(key + " : " + v.toString());
 			values = v.toString().split(",");
-			v1 = values[0].trim();
-			v2 = values[1].trim();
+			if(values.length > 1) {
+				v1 = values[0].trim();
+				v2 = values[1].trim();
+			}
+			
 			
 			map.put("nickname", key.toString());
 			map.put("date", v1);
