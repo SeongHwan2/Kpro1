@@ -83,7 +83,7 @@ public class FileService {
 					//저장경로 + 파일명 정의
 //					String realPath = req.getSession().getServletContext().getRealPath("/"); // 프로젝트까지 위치
 //					String Path = "D:\\IDE\\workspace\\upload\\" + nickName + "\\"; // 작성자 / 메뉴 / 날짜 / 시간 / 파일명 등으로 관리할수있다 >> 디렉토리 관리
-					String Path = "/home/ysh/" + nickName + "/";
+					String Path = "/home/ysh/upload/" + nickName + "/";
 					url = "/home/ysh/upload/" + nickName + "/" + title + ext;
 //					url = "D:\\IDE\\workspace\\upload\\" + nickName + "\\" + title + ext;
 					System.out.println(url);
