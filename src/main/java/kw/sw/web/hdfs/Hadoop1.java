@@ -30,10 +30,10 @@ public class Hadoop1 {
 	protected Configuration localConf = null;
 	protected Configuration hadoopConf = null;
 	//local Path 정의
-//	protected String Local = "/home/ysh/upload/";
-	protected String Local = "D:\\IDE\\workspace\\upload\\";
-	protected String hdfsUrl = "hdfs://192.168.3.125:9000";
-//	protected String hdfsUrl = "hdfs://gdj16:9000"; //service server 주소
+	protected String Local = "/home/ysh/upload/";
+//	protected String Local = "D:\\IDE\\workspace\\upload\\";
+//	protected String hdfsUrl = "hdfs://192.168.3.125:9000";
+	protected String hdfsUrl = "hdfs://gdj16:9000"; //service server 주소
 	// HADOOP 정제 대상 경로, 처리 경로 객체설정
 //	protected final String INPUT = "/input/";
 	protected final String INPUT = "/input/ysh/";
@@ -84,8 +84,8 @@ public class Hadoop1 {
 		boolean status = true;
 		//넘어온 nickname, fileName 확인
 		System.out.println(nickname + "-----" + fileName);
-		Rlocal = Local + nickname + "\\";
-//		Rlocal = Local + nickname + "/";
+//		Rlocal = Local + nickname + "\\";
+		Rlocal = Local + nickname + "/";
 		try {
 			localConf = new Configuration();
 			hadoopConf = new Configuration();
@@ -97,8 +97,8 @@ public class Hadoop1 {
 			outputPath = new Path(OUTPUT);
 			
 			//HADOOP 정제시 사용할 경로 정의
-			localSystem = FileSystem.getLocal(localConf);
-//			localSystem = FileSystem.get(localConf);
+//			localSystem = FileSystem.getLocal(localConf);
+			localSystem = FileSystem.get(localConf);
 			hadoopSystem = FileSystem.get(hadoopConf);
 			
 			FileStatus[] fileList = localSystem.listStatus(new Path(Rlocal));
